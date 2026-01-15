@@ -204,12 +204,3 @@ Cloud & Backend Enthusiast
 
 ---
 
-If you want, next I can:
-
-* Rewrite this README to sound **more corporate**
-* Shorten it for **GitHub recruiters**
-* Add **screenshots section**
-* Add **API documentation**
-* Add **resume bullet points**
-
-Just tell me 👍
