@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loading...</title>
+</head>
+<body>
+  <p>Logging you in...</p>
+
+  <script>
+    const code = sessionStorage.getItem("auth_code");
+
+    if (!code) {
+      document.body.innerHTML = "No auth code found";
+      throw new Error("No auth code");
+    }
+
+    fetch("http://localhost:5000/auth/callback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ code })
+    })
+    .then(res => res.json())
+    .then(data => {
+      sessionStorage.setItem("id_token", data.id_token);
+      sessionStorage.setItem("user_role", data.role);
+      sessionStorage.setItem("user_name", data.name);
+
+      if (data.role === "manager") {
+        window.location.href = "/manager.html";
+      } else {
+        window.location.href = "/employee.html";
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      document.body.innerHTML = "Login failed";
+    });
+  </script>
+</body>
+</html>

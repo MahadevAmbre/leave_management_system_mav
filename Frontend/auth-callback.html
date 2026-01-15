@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Logging in...</title>
+</head>
+<body>
+  <p>Redirecting...</p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+
+    if (!code) {
+      document.body.innerHTML = "No authorization code found.";
+    } else {
+      sessionStorage.setItem("auth_code", code);
+      window.location.href = "/loading.html";
+    }
+  </script>
+</body>
+</html>

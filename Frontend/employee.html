@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Management - Employee Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script>
+  const token = sessionStorage.getItem("id_token");
+  const role = sessionStorage.getItem("user_role");
+
+  if (!token || role !== "employee") {
+    window.location.href = "/";
+  }
+</script>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Leave Management System</h1>
+            <div class="user-info">
+                <span class="role-badge">Employee</span>
+                <span class="user-name" id="employeeName">John Doe</span>
+            </div>
+        </header>
+
+        <!-- Leave Balance Section -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Paid Leave Remaining</div>
+                <div class="stat-value" id="paidLeaveRemaining">12</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Unpaid Leave Taken</div>
+                <div class="stat-value" id="unpaidLeaveTaken">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Leave Taken</div>
+                <div class="stat-value" id="totalLeaveTaken">8</div>
+            </div>
+        </div>
+
+        <!-- Apply Leave Form -->
+        <section class="card">
+            <h2>Apply for Leave</h2>
+            <form id="leaveForm" class="leave-form">
+                <div class="form-group">
+                    <label for="leaveDays">Number of Days</label>
+                    <input type="number" id="leaveDays" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="leaveReason">Reason for Leave</label>
+                    <textarea id="leaveReason" rows="3" required placeholder="Enter reason for leave..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Apply Leave</button>
+            </form>
+        </section>
+
+        <!-- Leave History -->
+        <section class="card">
+            <h2>Leave History</h2>
+            <div class="table-container">
+                <table class="leave-table">
+                    <thead>
+                        <tr>
+                            <th>Date Applied</th>
+                            <th>Days</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaveHistory">
+                        <!-- Leave history will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize employee dashboard
+        if (typeof initEmployeeDashboard === 'function') {
+            initEmployeeDashboard();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Management - Manager Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script>
+  const token = sessionStorage.getItem("id_token");
+  const role = sessionStorage.getItem("user_role");
+
+  if (!token || role !== "manager") {
+    window.location.href = "/";
+  }
+</script>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Leave Management System</h1>
+            <div class="user-info">
+                <span class="role-badge manager">Manager</span>
+                <span class="user-name" id="managerName">Sarah Manager</span>
+            </div>
+        </header>
+
+        <!-- Statistics Overview -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Pending Requests</div>
+                <div class="stat-value" id="pendingCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Approved This Month</div>
+                <div class="stat-value" id="approvedCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Rejected This Month</div>
+                <div class="stat-value" id="rejectedCount">0</div>
+            </div>
+        </div>
+
+        <!-- Leave Requests Table -->
+        <section class="card">
+            <h2>Leave Requests</h2>
+            <div class="table-container">
+                <table class="leave-table">
+                    <thead>
+                        <tr>
+                            <th>Employee Name</th>
+                            <th>Days</th>
+                            <th>Reason</th>
+                            <th>Date Applied</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaveRequests">
+                        <!-- Leave requests will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize manager dashboard
+        if (typeof initManagerDashboard === 'function') {
+            initManagerDashboard();
+        }
+    </script>
+</body>
+</html>
